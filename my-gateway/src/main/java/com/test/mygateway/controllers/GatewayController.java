@@ -32,7 +32,7 @@ public class GatewayController {
             instances = discoveryClient.getInstances("kladr-web-api");
         }
         ServiceInstance instance = instances.stream().findFirst().orElseThrow(() -> new RuntimeException("not found"));
-        String url = String.format("%s/get?kladr=%s", instance.getUri(), kladr);
+        String url = String.format("%s/get?kladr=%s", instance.getUri(), kladr).replace("host.docker.internal", "localhost");
         System.out.println(url);
         return restTemplate.getForObject(url, Object.class);
     }
