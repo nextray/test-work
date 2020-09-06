@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: database-api
+  cloud:
+    consul:
+      host: 172.17.0.2
+      port: 8500
+server:
+  port: 8001

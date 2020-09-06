@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: kladr-web-api
+  cloud:
+    consul:
+      host: 172.17.0.2
+      port: 8500
+server:
+  port: 8002

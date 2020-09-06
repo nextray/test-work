@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/database-api/database-api.iml" filepath="$PROJECT_DIR$/database-api/database-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kladr-api/kladr-api.iml" filepath="$PROJECT_DIR$/kladr-api/kladr-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-gateway/my-gateway.iml" filepath="$PROJECT_DIR$/my-gateway/my-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_work.iml" filepath="$PROJECT_DIR$/test_work.iml" />
+    </modules>
+  </component>
+</project>
