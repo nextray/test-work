@@ -3,7 +3,7 @@ spring:
     name: my-gateway
   cloud:
     consul:
-      host: localhost
+      host: http://consul_docker
       port: 8500
 server:
   port: 8080

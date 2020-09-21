@@ -1,0 +1,30 @@
+version: '3'
+services:
+  ##docker run --name=consul_docker --rm -d -p 8500:8500 -p 8600:8600/udp consul agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0
+  consul_docker:
+    image: consul
+    ports:
+    - "8500:8500"
+    command: "agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0"
+  gateway:
+    build:
+      context: ./my-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - consul_docker
+  database-api:
+    build:
+      context: ./database-api
+      dockerfile: Dockerfile
+    links:
+      - consul_docker
+      - gateway
+  kladr-api:
+    build:
+      context: ./kladr-api
+      dockerfile: Dockerfile
+    links:
+      - consul_docker
+      - gateway

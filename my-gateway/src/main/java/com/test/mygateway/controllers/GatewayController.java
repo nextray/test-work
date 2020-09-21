@@ -2,7 +2,6 @@ package com.test.mygateway.controllers;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,19 +31,20 @@ public class GatewayController {
             instances = discoveryClient.getInstances("kladr-web-api");
         }
         ServiceInstance instance = instances.stream().findFirst().orElseThrow(() -> new RuntimeException("not found"));
-        String url = String.format("%s/get?kladr=%s", instance.getUri(), kladr).replace("host.docker.internal", "localhost");
-        System.out.println(url);
+        String url = String.format("%s/get?kladr=%s", instance.getUri(), kladr);
         return restTemplate.getForObject(url, Object.class);
     }
 
-    @RequestMapping("/services")
-    public List<String> allServices() {
-        return discoveryClient.getServices();
-    }
-
-    @RequestMapping("/services/{applicationName}")
-    public List<ServiceInstance> serviceInstancesByApplicationName(
-            @PathVariable String applicationName) {
-        return this.discoveryClient.getInstances(applicationName);
+    @RequestMapping("/add")
+    public Object addToDatabase(
+            @RequestParam(defaultValue = "1") Long kladr,
+            @RequestParam(defaultValue = "Пермский Край->Оханский Район->Замании Территория СНП")  String address
+    ){
+        ServiceInstance instance = discoveryClient.getInstances("database-api")
+                .stream()
+                .findFirst()
+                .orElseThrow(()->new RuntimeException("not found"));
+        String url = String.format("%s/add?kladr=%s&address=%s", instance.getUri(), kladr, address);
+        return restTemplate.getForObject(url, String.class);
     }
 }

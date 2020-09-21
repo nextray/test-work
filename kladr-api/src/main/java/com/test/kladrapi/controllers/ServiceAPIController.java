@@ -39,8 +39,6 @@ public class ServiceAPIController {
         RequestEntity requestEntity = RequestEntity.post(uri)
                 .headers(httpHeaders)
                 .body(map);
-        System.out.println("requestEntity: ");
-        System.out.println(requestEntity.toString());
         ResponseEntity<Object> response = restTemplate.exchange(requestEntity, Object.class);
         return response.getBody();
     }
